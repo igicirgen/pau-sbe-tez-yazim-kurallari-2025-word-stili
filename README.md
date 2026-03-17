@@ -2,7 +2,7 @@
 
 PAÜ SBE Tez Yazım Kuralları (2025) - Microsoft Word Kaynakça Stili
 
-Bu proje, Pamukkale Üniversitesi Sosyal Bilimler Enstitüsü (SBE) 2025 yılı güncel Tez Yazım Kılavuzu'na uygun olarak hazırlanmış bir Microsoft Word kaynakça stili (.xsl) dosyasıdır.
+Bu proje, Pamukkale Üniversitesi Sosyal Bilimler Enstitüsü (SBE) 2025 yılı güncel Tez Yazım Kılavuzu'na uygun olarak hazırlanmış bir Microsoft Word kaynakça stili (`.xsl`) dosyasıdır.
 
 Microsoft Word'ün yerleşik "Başvurular" (References) özelliğine bu stili ekleyerek, tez yazım sürecinde atıf ve kaynakçalarınızı otomatik olarak enstitü kurallarına uygun şekilde (Yazar Soyadı, Yıl, Sayfa vb.) oluşturabilirsiniz.
 
