@@ -20,7 +20,7 @@ Microsoft Word'ün yerleşik **"Başvurular" (References)** özelliğine bu stil
 **Dil Desteği:** Tamamen Türkçe karakter ve terim uyumlu (`ve`, `vd`., `çev.`, `ed.` `vb.`).
 
 
-## ** Kurulum Talimatları**
+## **Kurulum Talimatları**
 
 
 Dosyayı kullanabilmek için `PAU_SBE_TYK2025.xsl` dosyasını bilgisayarınızdaki ilgili Microsoft Word dizinine kopyalamanız gerekmektedir.
