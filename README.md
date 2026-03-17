@@ -20,7 +20,7 @@ Microsoft Word'ün yerleşik **"Başvurular" (References)** özelliğine bu stil
 **Dil Desteği:** Tamamen Türkçe karakter ve terim uyumlu (`ve`, `vd`., `çev.`, `ed.` `vb.`).
 
 
-## **🚀 Kurulum Talimatları**
+## ** Kurulum Talimatları**
 
 
 Dosyayı kullanabilmek için `PAU_SBE_TYK2025.xsl` dosyasını bilgisayarınızdaki ilgili Microsoft Word dizinine kopyalamanız gerekmektedir.
@@ -66,7 +66,7 @@ Açılan pencerede şu klasör yolunu izleyin:
 ``` 
 
 
-## **🛠️ Kullanım**
+## **Kullanım**
 
 
 Microsoft Word belgenizi açın.
@@ -78,7 +78,7 @@ Microsoft Word belgenizi açın.
 Artık "Alıntı Ekle" dediğinizde ve "Kaynakça" oluşturduğunuzda sistem otomatik olarak 2025 kılavuzuna göre biçimlendirme yapacaktır.
 
 
-**⚠️ Önemli Notlar**
+**Önemli Notlar**
 
 
 **Yazar Adları:** Kaynakları Word'e girerken `Ad Soyad` düzenine dikkat ediniz. Stil, soyadını otomatik olarak başa alacak ve adın sadece baş harfini kullanacaktır.
@@ -94,4 +94,4 @@ Bu proje akademik kullanıma açık ve ücretsizdir. Geliştirilmesine katkıda 
 
 **Hazırlayan:** İhsan Gurur İçirgen
 
-Pamukkale Üniversitesi öğrencilerine ve akademisyenlerine kolaylık olması dileğiyle.
+
