@@ -44,7 +44,7 @@ Office sürümünüze göre aşağıdaki dizine de kopyalayabilirsiniz:
 
 ```C:\Program Files\Microsoft Office\root\Office16\Bibliography\Style```
 
-**macOS İçin Kurulum (En Kolay Yöntem)**
+**macOS İçin Kurulum**
 
 `PAU_SBE_TYK2025.xsl` dosyasını indirin.
 
