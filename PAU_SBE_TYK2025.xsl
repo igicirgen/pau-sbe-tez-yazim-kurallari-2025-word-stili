@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:msxsl="urn:schemas-microsoft-com:xslt"	xmlns:b="http://schemas.openxmlformats.org/officeDocument/2006/bibliography" xmlns:t="http://www.microsoft.com/temp">
   <xsl:output method="html" encoding="us-ascii"/>
 
@@ -139,152 +139,1469 @@
         <xsl:value-of select="/*/b:Locals/b:DefaultLCID"/>
       </xsl:otherwise>
     </xsl:choose>
+
   </xsl:template>
 
-  <!-- PAÜ Özelleştirmeleri: Yazar adlarındaki virgülü kaldır ve adın sadece baş harfini al (Soyad A.) -->
-  <xsl:template name="templ_prop_APA_CitationLong_FML" ><xsl:text>%L %f.</xsl:text></xsl:template>
-  <xsl:template name="templ_prop_APA_CitationLong_FM" ><xsl:text>%L %f.</xsl:text></xsl:template>
-  <xsl:template name="templ_prop_APA_CitationLong_ML" ><xsl:text>%L %m.</xsl:text></xsl:template>
-  <xsl:template name="templ_prop_APA_CitationLong_FL" ><xsl:text>%L %f.</xsl:text></xsl:template>
-  
-  <xsl:template name="templ_prop_APA_CitationShort_FML" ><xsl:text>%L</xsl:text></xsl:template>
-  <xsl:template name="templ_prop_APA_CitationShort_FM" ><xsl:text>%L</xsl:text></xsl:template>
-  <xsl:template name="templ_prop_APA_CitationShort_ML" ><xsl:text>%L</xsl:text></xsl:template>
-  <xsl:template name="templ_prop_APA_CitationShort_FL" ><xsl:text>%L</xsl:text></xsl:template>
+  <xsl:template name="templ_prop_APA_CitationLong_FML" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>%L %f.</xsl:text>
+  </xsl:template>
 
-  <!-- Temel Metin Stringleri -->
-  <xsl:template name="templ_str_OnlineCap" ><xsl:text>Çevrimiçi</xsl:text></xsl:template>
-  <xsl:template name="templ_str_OnlineUnCap" ><xsl:text>çevrimiçi</xsl:text></xsl:template>
-  <xsl:template name="templ_str_FiledCap" ><xsl:text>Dosyalandı</xsl:text></xsl:template>
-  <xsl:template name="templ_str_PatentFiledCap" ><xsl:text>Patent Dosyalandı</xsl:text></xsl:template>
-  <xsl:template name="templ_str_InCap" ><xsl:text>İçinde</xsl:text></xsl:template>
-  <xsl:template name="templ_str_OnAlbumTitleCap" ><xsl:text>%1 albümünde</xsl:text></xsl:template>
-  <xsl:template name="templ_str_InNameCap" ><xsl:text>%1 İçinde</xsl:text></xsl:template>
-  <xsl:template name="templ_str_WithUnCap" ><xsl:text>ile</xsl:text></xsl:template>
-  <xsl:template name="templ_str_VersionShortCap" ><xsl:text>Sürüm</xsl:text></xsl:template>
-  <xsl:template name="templ_str_InterviewCap" ><xsl:text>Röportaj</xsl:text></xsl:template>
-  <xsl:template name="templ_str_InterviewWithCap" ><xsl:text>Röportaj yapılan</xsl:text></xsl:template>
-  <xsl:template name="templ_str_InterviewByCap" ><xsl:text>Röportajı yapan</xsl:text></xsl:template>
-  <xsl:template name="templ_str_ByCap" ><xsl:text>Tarafından</xsl:text></xsl:template>
   
-  <!-- PAÜ Özelleştirmeleri: 've' ve 'vd.' kullanımı -->
-  <xsl:template name="templ_str_AndUnCap" ><xsl:text>ve</xsl:text></xsl:template>
-  <xsl:template name="templ_str_AndOthersUnCap" ><xsl:text>vd.</xsl:text></xsl:template>
-  
-  <xsl:template name="templ_str_MotionPictureCap" ><xsl:text>Sinema Filmi</xsl:text></xsl:template>
-  <xsl:template name="templ_str_PatentCap" ><xsl:text>Patent</xsl:text></xsl:template>
-  <xsl:template name="templ_str_EditionShortUnCap" ><xsl:text>%1 bs.</xsl:text></xsl:template>
-  <xsl:template name="templ_str_EditionUnCap" ><xsl:text>%1. Baskı</xsl:text></xsl:template>
-  <xsl:template name="templ_str_RetrievedFromCap" ><xsl:text>%1 tarihinde %2 adresinden erişildi</xsl:text></xsl:template>
-  <xsl:template name="templ_str_RetrievedCap" ><xsl:text>%1 tarihinde erişildi</xsl:text></xsl:template>
-  <xsl:template name="templ_str_FromCap" ><xsl:text>%1</xsl:text></xsl:template>
-  <xsl:template name="templ_str_FromUnCap" ><xsl:text>adresinden</xsl:text></xsl:template>
-  <xsl:template name="templ_str_NoDateShortUnCap" ><xsl:text>t.y.</xsl:text></xsl:template>
-  <xsl:template name="templ_str_NumberShortCap" ><xsl:text>No.</xsl:text></xsl:template>
-  <xsl:template name="templ_str_NumberShortUnCap" ><xsl:text>no.</xsl:text></xsl:template>
-  <xsl:template name="templ_str_PatentNumberShortCap" ><xsl:text>Patent No. %1</xsl:text></xsl:template>
-  
-  <xsl:template name="templ_str_PagesCountinousShort" ><xsl:text></xsl:text></xsl:template>
-  <xsl:template name="templ_str_PageShort" ><xsl:text></xsl:text></xsl:template>
-  
-  <xsl:template name="templ_str_SineNomineShort" ><xsl:text>y.y.</xsl:text></xsl:template>
-  <xsl:template name="templ_str_SineLocoShort" ><xsl:text>y.y.</xsl:text></xsl:template>
-  <xsl:template name="templ_str_SineLocoSineNomineShort" ><xsl:text>y.y.: y.y.</xsl:text></xsl:template>
-  <xsl:template name="templ_str_VolumeOfShortCap" ><xsl:text>Cilt</xsl:text></xsl:template>
-  <xsl:template name="templ_str_VolumesOfShortCap" ><xsl:text>Ciltler</xsl:text></xsl:template>
-  <xsl:template name="templ_str_VolumeShortCap" ><xsl:text>Cilt: %1</xsl:text></xsl:template>
-  <xsl:template name="templ_str_VolumeShortUnCap" ><xsl:text>cilt: %1</xsl:text></xsl:template>
-  <xsl:template name="templ_str_VolumesShortUnCap" ><xsl:text>ciltler: %1</xsl:text></xsl:template>
-  <xsl:template name="templ_str_VolumesShortCap" ><xsl:text>Ciltler: %1</xsl:text></xsl:template>
-  <xsl:template name="templ_str_VolumeCap" ><xsl:text>Cilt</xsl:text></xsl:template>
-  <xsl:template name="templ_str_AuthorShortUnCap" ><xsl:text>yazar</xsl:text></xsl:template>
-  <xsl:template name="templ_str_BookAuthorShortUnCap" ><xsl:text>kitap yazarı</xsl:text></xsl:template>
-  <xsl:template name="templ_str_ArtistShortUnCap" ><xsl:text>sanatçı</xsl:text></xsl:template>
-  <xsl:template name="templ_str_WriterCap" ><xsl:text>Yazar</xsl:text></xsl:template>
-  <xsl:template name="templ_str_WritersCap" ><xsl:text>Yazarlar</xsl:text></xsl:template>
-  <xsl:template name="templ_str_WriterShortUnCap" ><xsl:text>yazar</xsl:text></xsl:template>
-  <xsl:template name="templ_str_ConductedByCap" ><xsl:text>Yöneten</xsl:text></xsl:template>
-  <xsl:template name="templ_str_ConductedByUnCap" ><xsl:text>yöneten</xsl:text></xsl:template>
-  <xsl:template name="templ_str_ConductorCap" ><xsl:text>Orkestra Şefi</xsl:text></xsl:template>
-  <xsl:template name="templ_str_ConductorsCap" ><xsl:text>Orkestra Şefleri</xsl:text></xsl:template>
-  <xsl:template name="templ_str_ConductorShortCap" ><xsl:text>Şef</xsl:text></xsl:template>
-  <xsl:template name="templ_str_ConductorShortUnCap" ><xsl:text>şef</xsl:text></xsl:template>
-  <xsl:template name="templ_str_ConductorsShortCap" ><xsl:text>Şefler</xsl:text></xsl:template>
-  <xsl:template name="templ_str_ConductorsShortUnCap" ><xsl:text>şefler</xsl:text></xsl:template>
-  <xsl:template name="templ_str_CounselShortUnCapIso" ><xsl:text>danışman</xsl:text></xsl:template>
-  <xsl:template name="templ_str_CounselShortUnCap" ><xsl:text>danışman</xsl:text></xsl:template>
-  <xsl:template name="templ_str_DirectedByCap" ><xsl:text>Yönetmen</xsl:text></xsl:template>
-  <xsl:template name="templ_str_DirectedByUnCap" ><xsl:text>yönetmen</xsl:text></xsl:template>
-  <xsl:template name="templ_str_DirectorCap" ><xsl:text>Yönetmen</xsl:text></xsl:template>
-  <xsl:template name="templ_str_DirectorsCap" ><xsl:text>Yönetmenler</xsl:text></xsl:template>
-  <xsl:template name="templ_str_DirectorShortCap" ><xsl:text>Ynt.</xsl:text></xsl:template>
-  <xsl:template name="templ_str_DirectorShortUnCap" ><xsl:text>ynt.</xsl:text></xsl:template>
-  <xsl:template name="templ_str_DirectorsShortCap" ><xsl:text>Ynt.</xsl:text></xsl:template>
-  <xsl:template name="templ_str_DirectorsShortUnCap" ><xsl:text>ynt.</xsl:text></xsl:template>
-  <xsl:template name="templ_str_EditedByCap" ><xsl:text>Editör</xsl:text></xsl:template>
-  <xsl:template name="templ_str_EditedByUnCap" ><xsl:text>editör</xsl:text></xsl:template>
-  <xsl:template name="templ_str_EditorCap" ><xsl:text>Editör</xsl:text></xsl:template>
-  <xsl:template name="templ_str_EditorsCap" ><xsl:text>Editörler</xsl:text></xsl:template>
-  <xsl:template name="templ_str_EditorShortCap" ><xsl:text>Ed.</xsl:text></xsl:template>
-  <xsl:template name="templ_str_EditorShortUnCap" ><xsl:text>ed.</xsl:text></xsl:template>
-  <xsl:template name="templ_str_EditorsShortCap" ><xsl:text>Ed.</xsl:text></xsl:template>
-  <xsl:template name="templ_str_EditorsShortUnCap" ><xsl:text>ed.</xsl:text></xsl:template>
-  <xsl:template name="templ_str_IntervieweeShortUnCap" ><xsl:text>görüşülen</xsl:text></xsl:template>
-  <xsl:template name="templ_str_InterviewerCap" ><xsl:text>Görüşmeci</xsl:text></xsl:template>
-  <xsl:template name="templ_str_InterviewersCap" ><xsl:text>Görüşmeciler</xsl:text></xsl:template>
-  <xsl:template name="templ_str_InventorShortUnCap" ><xsl:text>mucit</xsl:text></xsl:template>
-  <xsl:template name="templ_str_PerformedByCap" ><xsl:text>Sergileyen</xsl:text></xsl:template>
-  <xsl:template name="templ_str_PerformedByUnCap" ><xsl:text>sergileyen</xsl:text></xsl:template>
-  <xsl:template name="templ_str_PerformerCap" ><xsl:text>Sanatçı</xsl:text></xsl:template>
-  <xsl:template name="templ_str_PerformersCap" ><xsl:text>Sanatçılar</xsl:text></xsl:template>
-  <xsl:template name="templ_str_PerformerShortCap" ><xsl:text>Snt.</xsl:text></xsl:template>
-  <xsl:template name="templ_str_PerformerShortUnCap" ><xsl:text>snt.</xsl:text></xsl:template>
-  <xsl:template name="templ_str_PerformersShortCap" ><xsl:text>Snt.</xsl:text></xsl:template>
-  <xsl:template name="templ_str_PerformersShortUnCap" ><xsl:text>snt.</xsl:text></xsl:template>
-  <xsl:template name="templ_str_ProducedByCap" ><xsl:text>Yapımcı</xsl:text></xsl:template>
-  <xsl:template name="templ_str_ProducedByUnCap" ><xsl:text>yapımcı</xsl:text></xsl:template>
-  <xsl:template name="templ_str_ProducerCap" ><xsl:text>Yapımcı</xsl:text></xsl:template>
-  <xsl:template name="templ_str_ProducersCap" ><xsl:text>Yapımcılar</xsl:text></xsl:template>
-  <xsl:template name="templ_str_ProductionCompanyShortCap" ><xsl:text>Yapım Şirketi</xsl:text></xsl:template>
-  <xsl:template name="templ_str_ProducerShortCap" ><xsl:text>Ypm.</xsl:text></xsl:template>
-  <xsl:template name="templ_str_ProducersShortCap" ><xsl:text>Ypm.</xsl:text></xsl:template>
-  <xsl:template name="templ_str_ProducerShortUnCap" ><xsl:text>ypm.</xsl:text></xsl:template>
-  <xsl:template name="templ_str_RecordedByCap" ><xsl:text>Kaydeden</xsl:text></xsl:template>
-  <xsl:template name="templ_str_TranslatedByCap" ><xsl:text>Çeviren</xsl:text></xsl:template>
-  <xsl:template name="templ_str_TranslatedByUnCap" ><xsl:text>çeviren</xsl:text></xsl:template>
-  <xsl:template name="templ_str_TranslatorCap" ><xsl:text>Çevirmen</xsl:text></xsl:template>
-  <xsl:template name="templ_str_TranslatorsCap" ><xsl:text>Çevirmenler</xsl:text></xsl:template>
-  <xsl:template name="templ_str_TranslatorShortCap" ><xsl:text>Çev.</xsl:text></xsl:template>
-  <xsl:template name="templ_str_TranslatorShortUnCap" ><xsl:text>çev.</xsl:text></xsl:template>
-  <xsl:template name="templ_str_TranslatorsShortCap" ><xsl:text>Çev.</xsl:text></xsl:template>
-  <xsl:template name="templ_str_TranslatorsShortUnCap" ><xsl:text>çev.</xsl:text></xsl:template>
-  <xsl:template name="templ_str_ComposerCap" ><xsl:text>Besteci</xsl:text></xsl:template>
-  <xsl:template name="templ_str_ComposersCap" ><xsl:text>Besteciler</xsl:text></xsl:template>
-  <xsl:template name="templ_str_ComposerShortCap" ><xsl:text>Bes.</xsl:text></xsl:template>
-  <xsl:template name="templ_str_ComposersShortCap" ><xsl:text>Bes.</xsl:text></xsl:template>
-  <xsl:template name="templ_str_ComposerShortUnCapIso" ><xsl:text>bes.</xsl:text></xsl:template>
-  <xsl:template name="templ_str_CompiledByCap" ><xsl:text>Derleyen</xsl:text></xsl:template>
-  <xsl:template name="templ_str_CompiledByUnCap" ><xsl:text>derleyen</xsl:text></xsl:template>
-  <xsl:template name="templ_str_CompilerCap" ><xsl:text>Derleyici</xsl:text></xsl:template>
-  <xsl:template name="templ_str_CompilersCap" ><xsl:text>Derleyiciler</xsl:text></xsl:template>
-  <xsl:template name="templ_str_CompilerShortCap" ><xsl:text>Der.</xsl:text></xsl:template>
-  <xsl:template name="templ_str_CompilerShortUnCap" ><xsl:text>der.</xsl:text></xsl:template>
-  <xsl:template name="templ_str_CompilersShortCap" ><xsl:text>Der.</xsl:text></xsl:template>
-  <xsl:template name="templ_str_CompilersShortUnCap" ><xsl:text>der.</xsl:text></xsl:template>
-  <xsl:template name="templ_str_CompilerShortUnCapIso" ><xsl:text>der.</xsl:text></xsl:template>
+  <xsl:template name="templ_prop_APA_CitationLong_FM" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>%L %f.</xsl:text>
+  </xsl:template>
 
-  <!-- Format Özellikleri -->
-  <xsl:template name="templ_prop_Culture" ><xsl:text>tr-TR</xsl:text></xsl:template>
-  <xsl:template name="templ_prop_Direction" ><xsl:text>ltr</xsl:text></xsl:template>
-  <xsl:template name="templ_prop_NoItalics" ><xsl:text>no</xsl:text></xsl:template>
-  <xsl:template name="templ_prop_TitleOpen" ><xsl:text></xsl:text></xsl:template>
-  <xsl:template name="templ_prop_TitleClose" ><xsl:text></xsl:text></xsl:template>  
-  <xsl:template name="templ_prop_EndChars" ><xsl:text>.,;?!</xsl:text></xsl:template>
-  <xsl:template name="templ_prop_NormalizeSpace" ><xsl:text>no</xsl:text></xsl:template>
-  <xsl:template name="templ_prop_Space" ><xsl:text>&#32;</xsl:text></xsl:template>
-  <xsl:template name="templ_prop_NonBreakingSpace" ><xsl:text>&#160;</xsl:text></xsl:template>
-  <xsl:template name="templ_prop_ListSeparator" ><xsl:text>, </xsl:text></xsl:template>
   
+  <xsl:template name="templ_prop_APA_CitationLong_ML" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>%L %m.</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_prop_APA_CitationLong_FL" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>%L %f.</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_prop_APA_CitationShort_FML" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>%L</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_prop_APA_CitationShort_FM" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>%L</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_prop_APA_CitationShort_ML" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>%L</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_prop_APA_CitationShort_FL" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>%L</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_OnlineCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>Çevrimiçi</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_OnlineUnCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>çevrimiçi</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_FiledCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>Dosyalandı</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_PatentFiledCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>Patent Dosyalandı</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_InCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>İçinde</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_OnAlbumTitleCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>%1 albümünde</xsl:text>
+  </xsl:template>
+
+
+  
+  <xsl:template name="templ_str_InNameCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>%1 İçinde</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_WithUnCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>ile</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_VersionShortCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>Sürüm</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_InterviewCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>Röportaj</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_InterviewWithCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>Röportaj yapılan</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_InterviewByCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>Röportajı yapan</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_ByCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>Tarafından</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_AndUnCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>ve</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_AndOthersUnCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>vd.</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_MotionPictureCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>Sinema Filmi</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_PatentCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>Patent</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_EditionShortUnCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>%1 bs.</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_EditionUnCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>%1. Baskı</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_RetrievedFromCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>%1 tarihinde %2 adresinden erişildi</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_RetrievedCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>%1 tarihinde erişildi</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_FromCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <!-- "retrieved from" should be omitted if there is no date -->
+    <xsl:text>%1</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_FromUnCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>adresinden</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_NoDateShortUnCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>t.y.</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_NumberShortCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>No.</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_NumberShortUnCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>no.</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_PatentNumberShortCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>Patent No. %1</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_PagesCountinousShort" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text></xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_PageShort" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text></xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_SineNomineShort" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>y.y.</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_SineLocoShort" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>y.y.</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_SineLocoSineNomineShort" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>y.y.: y.y.</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_VolumeOfShortCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>Cilt</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_VolumesOfShortCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>Ciltler</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_VolumeShortCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>Cilt: %1</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_VolumeShortUnCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>cilt: %1</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_VolumesShortUnCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>ciltler: %1</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_VolumesShortCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>Ciltler: %1</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_VolumeCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>Cilt</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_AuthorShortUnCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>yazar</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_BookAuthorShortUnCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>kitap yazarı</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_ArtistShortUnCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>sanatçı</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_WriterCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>Yazar</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_WritersCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>Yazarlar</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_WriterShortUnCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>yazar</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_ConductedByCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>Yöneten</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_ConductedByUnCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>yöneten</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_ConductorCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>Orkestra Şefi</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_ConductorsCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>Orkestra Şefleri</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_ConductorShortCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>Şef</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_ConductorShortUnCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>şef</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_ConductorsShortCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>Şefler</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_ConductorsShortUnCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>şefler</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_CounselShortUnCapIso" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>danışman</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_CounselShortUnCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>danışman</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_DirectedByCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>Yönetmen</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_DirectedByUnCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>yönetmen</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_DirectorCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>Yönetmen</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_DirectorsCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>Yönetmenler</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_DirectorShortCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>Ynt.</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_DirectorShortUnCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>ynt.</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_DirectorsShortCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>Ynt.</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_DirectorsShortUnCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>ynt.</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_EditedByCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>Editör</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_EditedByUnCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>editör</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_EditorCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>Editör</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_EditorsCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>Editörler</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_EditorShortCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>Ed.</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_EditorShortUnCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>ed.</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_EditorsShortCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>Ed.</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_EditorsShortUnCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>ed.</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_IntervieweeShortUnCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>görüşülen</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_InterviewerCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>Görüşmeci</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_InterviewersCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>Görüşmeciler</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_InventorShortUnCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>mucit</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_PerformedByCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>Sergileyen</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_PerformedByUnCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>sergileyen</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_PerformerCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>Sanatçı</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_PerformersCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>Sanatçılar</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_PerformerShortCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>Snt.</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_PerformerShortUnCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>snt.</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_PerformersShortCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>Snt.</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_PerformersShortUnCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>snt.</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_ProducedByCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>Yapımcı</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_ProducedByUnCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>yapımcı</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_ProducerCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>Yapımcı</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_ProducersCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>Yapımcılar</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_ProductionCompanyShortCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>Yapım Şirketi</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_ProducerShortCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>Ypm.</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_ProducersShortCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>Ypm.</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_ProducerShortUnCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>ypm.</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_RecordedByCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>Kaydeden</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_TranslatedByCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>Çeviren</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_TranslatedByUnCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>çeviren</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_TranslatorCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>Çevirmen</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_TranslatorsCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>Çevirmenler</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_TranslatorShortCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>Çev.</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_TranslatorShortUnCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>çev.</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_TranslatorsShortCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>Çev.</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_TranslatorsShortUnCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>çev.</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_ComposerCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>Besteci</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_ComposersCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>Besteciler</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_ComposerShortCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>Bes.</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_ComposersShortCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>Bes.</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_ComposerShortUnCapIso" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>bes.</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_CompiledByCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>Derleyen</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_CompiledByUnCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>derleyen</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_CompilerCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>Derleyici</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_CompilersCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>Derleyiciler</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_CompilerShortCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>Der.</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_CompilerShortUnCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>der.</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_CompilersShortCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>Der.</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_CompilersShortUnCap" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>der.</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_str_CompilerShortUnCapIso" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>der.</xsl:text>
+  </xsl:template>
+
+
+  
+
+  
+  <xsl:template name="templ_prop_Culture" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>tr-TR</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_prop_Direction" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>ltr</xsl:text>
+  </xsl:template>
+
+
+  
+
+  
+  <xsl:template name="templ_prop_NoItalics" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>no</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_prop_TitleOpen" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text></xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_prop_TitleClose" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text></xsl:text>
+  </xsl:template>  
+
+  
+  <xsl:template name="templ_prop_EndChars" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>.,;?!</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_prop_NormalizeSpace" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>no</xsl:text>
+    
+  </xsl:template>
+
+  
+  <xsl:template name="templ_prop_Space" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>&#32;</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_prop_NonBreakingSpace" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>&#160;</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_prop_ListSeparator" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>, </xsl:text>
+  </xsl:template>
+
   <xsl:template name="formatMediumInBrackets">
     <xsl:if test="string-length(b:Medium) > 0">
       <xsl:call-template name="templ_prop_Space"/>
@@ -294,66 +1611,503 @@
     </xsl:if>
   </xsl:template>
   
-  <xsl:template name="templ_prop_Dot" ><xsl:text>.</xsl:text></xsl:template>
-  <xsl:template name="templ_prop_DotInitial" ><xsl:text>.</xsl:text></xsl:template>
-  <xsl:template name="templ_prop_GroupSeparator" ><xsl:text>, </xsl:text></xsl:template>
-  <xsl:template name="templ_prop_EnumSeparator" ><xsl:text>, </xsl:text></xsl:template>
-  <xsl:template name="templ_prop_Equal" ><xsl:text>=</xsl:text></xsl:template>
-  <xsl:template name="templ_prop_Enum" ><xsl:text>, </xsl:text></xsl:template>
-  <xsl:template name="templ_prop_OpenQuote" ><xsl:text>“</xsl:text></xsl:template>
-  <xsl:template name="templ_prop_CloseQuote" ><xsl:text>”</xsl:text></xsl:template>
-  <xsl:template name="templ_prop_OpenBracket" ><xsl:text>(</xsl:text></xsl:template>
-  <xsl:template name="templ_prop_CloseBracket" ><xsl:text>)</xsl:text></xsl:template>
-  <xsl:template name="templ_prop_FromToDash" ><xsl:text>-</xsl:text></xsl:template>
-  <xsl:template name="templ_prop_OpenLink" ><xsl:text>&lt;</xsl:text></xsl:template>
-  <xsl:template name="templ_prop_CloseLink" ><xsl:text>&gt;</xsl:text></xsl:template>
+  <xsl:template name="templ_prop_Dot" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>.</xsl:text>
+  </xsl:template>
+
   
-  <!-- PAÜ Özelleştirmesi: Kaynakçada Yazarlar arası ayraç ',' -->
-  <xsl:template name="templ_prop_AuthorsSeparator" ><xsl:text>, </xsl:text></xsl:template>
-  <xsl:template name="templ_prop_NoAndBeforeLastAuthor" ><xsl:text>yes</xsl:text></xsl:template>
-  <xsl:template name="templ_prop_NoCommaBeforeAnd" ><xsl:text>yes</xsl:text></xsl:template>
+  <xsl:template name="templ_prop_DotInitial" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>.</xsl:text>
+  </xsl:template>
 
-  <xsl:template name="templ_prop_SimpleAuthor_F" ><xsl:text>%F</xsl:text></xsl:template>
-  <xsl:template name="templ_prop_SimpleAuthor_M" ><xsl:text>%M</xsl:text></xsl:template>
-  <xsl:template name="templ_prop_SimpleAuthor_L" ><xsl:text>%L</xsl:text></xsl:template>
-  <xsl:template name="templ_prop_SimpleDate_D" ><xsl:text>%D</xsl:text></xsl:template>
-  <xsl:template name="templ_prop_SimpleDate_M" ><xsl:text>%M</xsl:text></xsl:template>
-  <xsl:template name="templ_prop_SimpleDate_Y" ><xsl:text>%Y</xsl:text></xsl:template>
-
-  <!-- PAÜ Kaynakça Yazar Formatı: Soyadı İ. -->
-  <xsl:template name="templ_prop_APA_MainAuthors_FML" ><xsl:text>%L %f.</xsl:text></xsl:template>
-  <xsl:template name="templ_prop_APA_MainAuthors_FM" ><xsl:text>%L %f.</xsl:text></xsl:template>
-  <xsl:template name="templ_prop_APA_MainAuthors_ML" ><xsl:text>%L %m.</xsl:text></xsl:template>
-  <xsl:template name="templ_prop_APA_MainAuthors_FL" ><xsl:text>%L %f.</xsl:text></xsl:template>
   
-  <xsl:template name="templ_prop_APA_SecondaryAuthors_FML" ><xsl:text>%L %f.</xsl:text></xsl:template>
-  <xsl:template name="templ_prop_APA_SecondaryAuthors_FM" ><xsl:text>%L %f.</xsl:text></xsl:template>
-  <xsl:template name="templ_prop_APA_SecondaryAuthors_ML" ><xsl:text>%L %m.</xsl:text></xsl:template>
-  <xsl:template name="templ_prop_APA_SecondaryAuthors_FL" ><xsl:text>%L %f.</xsl:text></xsl:template>
+  <xsl:template name="templ_prop_GroupSeparator" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>, </xsl:text>
+  </xsl:template>
 
-  <!-- Metin İçi Atıflarda "ve" ayıracı -->
-  <xsl:template name="templ_prop_APA_BeforeLastAuthor" ><xsl:text>ve</xsl:text></xsl:template>
-
-  <xsl:template name="templ_prop_APA_GeneralOpen" ><xsl:text>(</xsl:text></xsl:template>
-  <xsl:template name="templ_prop_APA_GeneralClose" ><xsl:text>)</xsl:text></xsl:template>
-  <xsl:template name="templ_prop_APA_SecondaryOpen" ><xsl:text>[</xsl:text></xsl:template>
-  <xsl:template name="templ_prop_APA_SecondaryClose" ><xsl:text>]</xsl:text></xsl:template>
-  <xsl:template name="templ_prop_Hyphens" ><xsl:text>-</xsl:text></xsl:template>
-
-  <xsl:template name="templ_prop_APA_Date_DMY" ><xsl:text>%Y, %M %D</xsl:text></xsl:template>
-  <xsl:template name="templ_prop_APA_Date_DM" ><xsl:text>%M %D</xsl:text></xsl:template>
-  <xsl:template name="templ_prop_APA_Date_MY" ><xsl:text>%Y, %M</xsl:text></xsl:template>
-  <xsl:template name="templ_prop_APA_Date_DY" ><xsl:text>%Y, %D</xsl:text></xsl:template>
   
-  <xsl:template name="templ_prop_APA_DateAccessed_DMY" ><xsl:text>%D.%M.%Y</xsl:text></xsl:template>
-  <xsl:template name="templ_prop_APA_DateAccessed_DM" ><xsl:text>%D.%M</xsl:text></xsl:template>
-  <xsl:template name="templ_prop_APA_DateAccessed_MY" ><xsl:text>%M.%Y</xsl:text></xsl:template>
-  <xsl:template name="templ_prop_APA_DateAccessed_DY" ><xsl:text>%D.%Y</xsl:text></xsl:template>
-  <xsl:template name="templ_prop_APA_DateCourt_DMY" ><xsl:text>%D.%M.%Y</xsl:text></xsl:template>
-  <xsl:template name="templ_prop_APA_DateCourt_DM" ><xsl:text>%D.%M</xsl:text></xsl:template>
-  <xsl:template name="templ_prop_APA_DateCourt_MY" ><xsl:text>%M.%Y</xsl:text></xsl:template>
-  <xsl:template name="templ_prop_APA_DateCourt_DY" ><xsl:text>%D.%Y</xsl:text></xsl:template>
+  <xsl:template name="templ_prop_EnumSeparator" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>, </xsl:text>
+  </xsl:template>
 
+  
+  <xsl:template name="templ_prop_Equal" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>=</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_prop_Enum" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>, </xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_prop_OpenQuote" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>“</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_prop_CloseQuote" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>”</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_prop_OpenBracket" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>(</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_prop_CloseBracket" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>)</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_prop_FromToDash" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>-</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_prop_OpenLink" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>&lt;</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_prop_CloseLink" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>&gt;</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_prop_AuthorsSeparator" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>, </xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_prop_NoAndBeforeLastAuthor" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>yes</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_prop_NoCommaBeforeAnd" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>yes</xsl:text>
+  </xsl:template>
+
+  <xsl:template name="templ_prop_SimpleAuthor_F" >
+  <xsl:text>%F</xsl:text>
+  
+  </xsl:template>
+
+  
+  <xsl:template name="templ_prop_SimpleAuthor_M" >
+  <xsl:text>%M</xsl:text>
+  
+  </xsl:template>
+
+  
+  <xsl:template name="templ_prop_SimpleAuthor_L" >
+  <xsl:text>%L</xsl:text>
+  
+  </xsl:template>
+
+  
+  <xsl:template name="templ_prop_SimpleDate_D" >
+  <xsl:text>%D</xsl:text>
+  
+  </xsl:template>
+
+  
+  <xsl:template name="templ_prop_SimpleDate_M" >
+  <xsl:text>%M</xsl:text>
+  
+  </xsl:template>
+
+  
+  <xsl:template name="templ_prop_SimpleDate_Y" >
+  <xsl:text>%Y</xsl:text>
+  
+  </xsl:template>
+
+  
+  <xsl:template name="templ_prop_APA_MainAuthors_FML" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>%L %f.</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_prop_APA_MainAuthors_FM" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>%L %f.</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_prop_APA_MainAuthors_ML" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>%L %m.</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_prop_APA_MainAuthors_FL" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>%L %f.</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_prop_APA_SecondaryAuthors_FML" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>%L %f.</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_prop_APA_SecondaryAuthors_FM" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>%L %f.</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_prop_APA_SecondaryAuthors_ML" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>%L %m.</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_prop_APA_SecondaryAuthors_FL" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>%L %f.</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_prop_APA_BeforeLastAuthor" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>ve</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_prop_APA_GeneralOpen" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>(</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_prop_APA_GeneralClose" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>)</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_prop_APA_SecondaryOpen" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>[</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_prop_APA_SecondaryClose" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>]</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_prop_Hyphens" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>-</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_prop_APA_Date_DMY" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>%Y, %M %D</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_prop_APA_Date_DM" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>%M %D</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_prop_APA_Date_MY" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>%Y, %M</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_prop_APA_Date_DY" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>%Y, %D</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_prop_APA_DateAccessed_DMY" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>%D.%M.%Y</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_prop_APA_DateAccessed_DM" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>%D.%M</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_prop_APA_DateAccessed_MY" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>%M.%Y</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_prop_APA_DateAccessed_DY" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>%D.%Y</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_prop_APA_DateCourt_DMY" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>%D.%M.%Y</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_prop_APA_DateCourt_DM" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>%D.%M</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_prop_APA_DateCourt_MY" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>%M.%Y</xsl:text>
+  </xsl:template>
+
+  
+  <xsl:template name="templ_prop_APA_DateCourt_DY" >
+    <xsl:param name="LCID" />
+    <xsl:variable name="_LCID">
+      <xsl:call-template name="localLCID">
+        <xsl:with-param name="LCID" select="$LCID"/>
+      </xsl:call-template>
+    </xsl:variable>
+    <xsl:text>%D.%Y</xsl:text>
+  </xsl:template>
+
+  <!-- Template for formatting a string as a functional hyperlink -->
   <xsl:template name="formatHyperlink">
     <xsl:param name="url"/>
     <a href="{$url}" target="_blank">
@@ -379,7 +2133,9 @@
   </xsl:template>
 
   <xsl:template match="/">
+
     <xsl:choose>
+
       <xsl:when test="b:Version">
         <xsl:text>2025</xsl:text>
       </xsl:when>
@@ -439,18 +2195,151 @@
               <b:ImportantField><xsl:text>b:Pages</xsl:text></b:ImportantField>
               <b:ImportantField><xsl:text>b:URL</xsl:text></b:ImportantField>
             </xsl:when>
-            
+
+            <xsl:when test="b:GetImportantFields/b:SourceType='ConferenceProceedings'">
+              <b:ImportantField><xsl:text>b:Author/b:Author/b:NameList</xsl:text></b:ImportantField>
+              <b:ImportantField><xsl:text>b:Title</xsl:text></b:ImportantField>
+      	      <b:ImportantField><xsl:text>b:ConferenceName</xsl:text></b:ImportantField>
+              <b:ImportantField><xsl:text>b:Year</xsl:text></b:ImportantField>
+	            <b:ImportantField><xsl:text>b:Month</xsl:text></b:ImportantField>
+              <b:ImportantField><xsl:text>b:Day</xsl:text></b:ImportantField>
+              <b:ImportantField><xsl:text>b:City</xsl:text></b:ImportantField>
+              <b:ImportantField><xsl:text>b:Publisher</xsl:text></b:ImportantField>
+              <b:ImportantField><xsl:text>b:URL</xsl:text></b:ImportantField>
+            </xsl:when>
+
+            <xsl:when test="b:GetImportantFields/b:SourceType='Report'">
+              <b:ImportantField><xsl:text>b:Author/b:Author/b:NameList</xsl:text></b:ImportantField>
+              <b:ImportantField><xsl:text>b:Title</xsl:text></b:ImportantField>
+              <b:ImportantField><xsl:text>b:Year</xsl:text></b:ImportantField>
+              <b:ImportantField><xsl:text>b:ThesisType</xsl:text></b:ImportantField>
+              <b:ImportantField><xsl:text>b:Institution</xsl:text></b:ImportantField>
+              <b:ImportantField><xsl:text>b:Department</xsl:text></b:ImportantField>
+              <b:ImportantField><xsl:text>b:Publisher</xsl:text></b:ImportantField>
+              <b:ImportantField><xsl:text>b:City</xsl:text></b:ImportantField>
+            </xsl:when>
+
+            <xsl:when test="b:GetImportantFields/b:SourceType='SoundRecording'">
+              <b:ImportantField><xsl:text>b:Author/b:Composer/b:NameList</xsl:text></b:ImportantField>
+              <b:ImportantField><xsl:text>b:Author/b:Performer/b:NameList</xsl:text></b:ImportantField>
+              <b:ImportantField><xsl:text>b:Title</xsl:text></b:ImportantField>
+              <b:ImportantField><xsl:text>b:Year</xsl:text></b:ImportantField>
+              <b:ImportantField><xsl:text>b:City</xsl:text></b:ImportantField>
+              <b:ImportantField><xsl:text>b:CountryRegion</xsl:text></b:ImportantField>
+              <b:ImportantField><xsl:text>b:StateProvince</xsl:text></b:ImportantField>
+            </xsl:when>
+
+            <xsl:when test="b:GetImportantFields/b:SourceType='Performance'">
+              <b:ImportantField><xsl:text>b:Title</xsl:text></b:ImportantField>
+              <b:ImportantField><xsl:text>b:Author/b:Writer/b:NameList</xsl:text></b:ImportantField>
+              <b:ImportantField><xsl:text>b:Author/b:Performer/b:NameList</xsl:text></b:ImportantField>
+              <b:ImportantField><xsl:text>b:Theater</xsl:text></b:ImportantField>
+              <b:ImportantField><xsl:text>b:City</xsl:text></b:ImportantField>
+              <b:ImportantField><xsl:text>b:CountryRegion</xsl:text></b:ImportantField>
+              <b:ImportantField><xsl:text>b:StateProvince</xsl:text></b:ImportantField>
+              <b:ImportantField><xsl:text>b:Year</xsl:text></b:ImportantField>
+              <b:ImportantField><xsl:text>b:Month</xsl:text></b:ImportantField>
+              <b:ImportantField><xsl:text>b:Day</xsl:text></b:ImportantField>
+            </xsl:when>
+
+            <xsl:when test="b:GetImportantFields/b:SourceType='Art'">
+              <b:ImportantField><xsl:text>b:Author/b:Artist/b:NameList</xsl:text></b:ImportantField>
+              <b:ImportantField><xsl:text>b:Title</xsl:text></b:ImportantField>
+              <b:ImportantField><xsl:text>b:Institution</xsl:text></b:ImportantField>
+              <b:ImportantField><xsl:text>b:PublicationTitle</xsl:text></b:ImportantField>
+              <b:ImportantField><xsl:text>b:City</xsl:text></b:ImportantField>
+            </xsl:when>
+
+            <xsl:when test="b:GetImportantFields/b:SourceType='DocumentFromInternetSite'">
+              <b:ImportantField><xsl:text>b:Author/b:Author/b:NameList</xsl:text></b:ImportantField>
+              <b:ImportantField><xsl:text>b:Title</xsl:text></b:ImportantField>
+              <b:ImportantField><xsl:text>b:InternetSiteTitle</xsl:text></b:ImportantField>
+              <b:ImportantField><xsl:text>b:Year</xsl:text></b:ImportantField>
+              <b:ImportantField><xsl:text>b:URL</xsl:text></b:ImportantField>
+              <b:ImportantField><xsl:text>b:YearAccessed</xsl:text></b:ImportantField>
+              <b:ImportantField><xsl:text>b:MonthAccessed</xsl:text></b:ImportantField>
+              <b:ImportantField><xsl:text>b:DayAccessed</xsl:text></b:ImportantField>
+            </xsl:when>
+
+            <xsl:when test="b:GetImportantFields/b:SourceType='InternetSite'">
+              <b:ImportantField><xsl:text>b:Author/b:Author/b:NameList</xsl:text></b:ImportantField>
+              <b:ImportantField><xsl:text>b:Title</xsl:text></b:ImportantField>
+              <b:ImportantField><xsl:text>b:InternetSiteTitle</xsl:text></b:ImportantField>
+              <b:ImportantField><xsl:text>b:Year</xsl:text></b:ImportantField>
+              <b:ImportantField><xsl:text>b:URL</xsl:text></b:ImportantField>
+              <b:ImportantField><xsl:text>b:YearAccessed</xsl:text></b:ImportantField>
+              <b:ImportantField><xsl:text>b:MonthAccessed</xsl:text></b:ImportantField>
+              <b:ImportantField><xsl:text>b:DayAccessed</xsl:text></b:ImportantField>
+            </xsl:when>
+
+            <xsl:when test="b:GetImportantFields/b:SourceType='Film'">
+              <b:ImportantField><xsl:text>b:Title</xsl:text></b:ImportantField>
+              <b:ImportantField><xsl:text>b:Author/b:Director/b:NameList</xsl:text></b:ImportantField>
+              <b:ImportantField><xsl:text>b:Year</xsl:text></b:ImportantField>
+            </xsl:when>
+
+            <xsl:when test="b:GetImportantFields/b:SourceType='Interview'">
+              <b:ImportantField><xsl:text>b:Author/b:Interviewee/b:NameList</xsl:text></b:ImportantField>
+              <b:ImportantField><xsl:text>b:Title</xsl:text></b:ImportantField>
+              <b:ImportantField><xsl:text>b:Author/b:Interviewer/b:NameList</xsl:text></b:ImportantField>
+              <b:ImportantField><xsl:text>b:Year</xsl:text></b:ImportantField>
+              <b:ImportantField><xsl:text>b:Month</xsl:text></b:ImportantField>
+              <b:ImportantField><xsl:text>b:Day</xsl:text></b:ImportantField>
+            </xsl:when>
+
+            <xsl:when test="b:GetImportantFields/b:SourceType='Patent'">
+              <b:ImportantField><xsl:text>b:Author/b:Inventor/b:NameList</xsl:text></b:ImportantField>
+              <b:ImportantField><xsl:text>b:Year</xsl:text></b:ImportantField>
+              <b:ImportantField><xsl:text>b:CountryRegion</xsl:text></b:ImportantField>
+              <b:ImportantField><xsl:text>b:PatentNumber</xsl:text></b:ImportantField>
+            </xsl:when>
+
+            <xsl:when test="b:GetImportantFields/b:SourceType='ElectronicSource'">
+              <b:ImportantField><xsl:text>b:Author/b:Author/b:NameList</xsl:text></b:ImportantField>
+              <b:ImportantField><xsl:text>b:Title</xsl:text></b:ImportantField>
+              <b:ImportantField><xsl:text>b:Year</xsl:text></b:ImportantField>
+              <b:ImportantField><xsl:text>b:URL</xsl:text></b:ImportantField>
+              <b:ImportantField><xsl:text>b:YearAccessed</xsl:text></b:ImportantField>
+              <b:ImportantField><xsl:text>b:MonthAccessed</xsl:text></b:ImportantField>
+              <b:ImportantField><xsl:text>b:DayAccessed</xsl:text></b:ImportantField>
+            </xsl:when>
+
+            <xsl:when test="b:GetImportantFields/b:SourceType='Case'">
+              <b:ImportantField><xsl:text>b:Title</xsl:text></b:ImportantField>
+              <b:ImportantField><xsl:text>b:CaseNumber</xsl:text></b:ImportantField>
+              <b:ImportantField><xsl:text>b:Court</xsl:text></b:ImportantField>
+              <b:ImportantField><xsl:text>b:Year</xsl:text></b:ImportantField>
+              <b:ImportantField><xsl:text>b:Month</xsl:text></b:ImportantField>
+              <b:ImportantField><xsl:text>b:Day</xsl:text></b:ImportantField>
+            </xsl:when>
+
+            <xsl:when test="b:GetImportantFields/b:SourceType='Misc'">
+              <b:ImportantField><xsl:text>b:Author/b:Author/b:NameList</xsl:text></b:ImportantField>
+              <b:ImportantField><xsl:text>b:Title</xsl:text></b:ImportantField>
+              <b:ImportantField><xsl:text>b:PublicationTitle</xsl:text></b:ImportantField>
+              <b:ImportantField><xsl:text>b:Year</xsl:text></b:ImportantField>
+              <b:ImportantField><xsl:text>b:Month</xsl:text></b:ImportantField>
+              <b:ImportantField><xsl:text>b:Day</xsl:text></b:ImportantField>
+              <b:ImportantField><xsl:text>b:City</xsl:text></b:ImportantField>
+              <b:ImportantField><xsl:text>b:CountryRegion</xsl:text></b:ImportantField>
+              <b:ImportantField><xsl:text>b:StateProvince</xsl:text></b:ImportantField>
+              <b:ImportantField><xsl:text>b:Publisher</xsl:text></b:ImportantField>
+            </xsl:when>
+
             <xsl:otherwise>
               <!-- Varsayılan Alanlar -->
               <b:ImportantField><xsl:text>b:Author/b:Author/b:NameList</xsl:text></b:ImportantField>
               <b:ImportantField><xsl:text>b:Title</xsl:text></b:ImportantField>
               <b:ImportantField><xsl:text>b:Year</xsl:text></b:ImportantField>
             </xsl:otherwise>
+
           </xsl:choose>
         </b:ImportantFields>
       </xsl:when>
 
+
 			<xsl:when test="b:Citation">
+
 				<xsl:variable name="ListPopulatedWithMain">
 						<xsl:call-template name="populateMain">
 							<xsl:with-param name="Type">b:Citation</xsl:with-param>
@@ -458,7 +2347,8 @@
 				</xsl:variable>
 
 				<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40">
-					<head></head>
+					<head>
+					</head>
 					<body>
 						<xsl:variable name="LCID">
 							<xsl:choose>
@@ -472,8 +2362,14 @@
 						</xsl:variable>
 
 						<xsl:element name="p">
-						<xsl:attribute name="lang"><xsl:value-of select="/*/b:Locals/b:Local[@LCID=$LCID]/@Culture"/></xsl:attribute>
-						<xsl:attribute name="dir"><xsl:value-of select="/*/b:Locals/b:Local[@LCID=$LCID]/b:Properties/b:Direction"/></xsl:attribute>
+
+						<xsl:attribute name="lang">
+							<xsl:value-of select="/*/b:Locals/b:Local[@LCID=$LCID]/@Culture"/>
+						</xsl:attribute>
+
+						<xsl:attribute name="dir">
+							<xsl:value-of select="/*/b:Locals/b:Local[@LCID=$LCID]/b:Properties/b:Direction"/>
+						</xsl:attribute>
 
 						<xsl:variable name="type">
 							<xsl:value-of select="msxsl:node-set($ListPopulatedWithMain)/b:Citation/b:Source/b:SourceType"/>
@@ -484,6 +2380,7 @@
 								<xsl:when test="string-length(msxsl:node-set($ListPopulatedWithMain)/b:Citation/b:Source/b:ShortTitle)>0">
 									<xsl:value-of select="msxsl:node-set($ListPopulatedWithMain)/b:Citation/b:Source/b:ShortTitle" />
 								</xsl:when>
+
 								<xsl:otherwise>
 									<xsl:value-of select="msxsl:node-set($ListPopulatedWithMain)/b:Citation/b:Source/b:Title" />
 								</xsl:otherwise>
@@ -498,7 +2395,39 @@
 							<xsl:copy-of select="msxsl:node-set($ListPopulatedWithMain)/b:Citation/b:Source/b:Author/b:Main"/>
 						</xsl:variable>
 
-						<xsl:variable name="maxCitationAuthors" select="2"/> <!-- PAÜ Metin içi kuralı: İkiden fazla yazar varsa vd. -->
+						<xsl:variable name="patentNumber">
+							<xsl:value-of select="msxsl:node-set($ListPopulatedWithMain)/b:Citation/b:Source/b:PatentNumber"/>
+						</xsl:variable>
+
+						<xsl:variable name="countryRegion">
+							<xsl:value-of select="msxsl:node-set($ListPopulatedWithMain)/b:Citation/b:Source/b:CountryRegion"/>
+						</xsl:variable>
+
+						<xsl:variable name="patent">
+							<xsl:if test="string-length($patentNumber)>0">
+								<xsl:if test="string-length($countryRegion) > 0">
+									<xsl:value-of select="$countryRegion"/>
+									<xsl:call-template name="templ_prop_Space"/>
+								</xsl:if>
+
+								<xsl:variable name="str_PatentNumberShortCap">
+									<xsl:call-template name="templ_str_PatentNumberShortCap"/>
+								</xsl:variable>
+
+								<xsl:call-template name="StringFormat">
+									<xsl:with-param name="format" select="$str_PatentNumberShortCap"/>
+									<xsl:with-param name="parameters">
+										<t:params>
+											<t:param>
+												<xsl:value-of select="$patentNumber"/>
+											</t:param>
+										</t:params>
+									</xsl:with-param>
+								</xsl:call-template>
+							</xsl:if>
+						</xsl:variable>
+
+						<xsl:variable name="maxCitationAuthors" select="2"/>
 
 						<xsl:variable name="author0">
 							<xsl:choose>
@@ -513,10 +2442,46 @@
 									<xsl:for-each select="msxsl:node-set($ListPopulatedWithMain)/b:Citation/b:Source/b:Author/b:Main/b:NameList/b:Person">
 										<xsl:if test="position() = 1">
 											<xsl:call-template name="formatNameCore">
-												<xsl:with-param name="FML"><xsl:call-template name="templ_prop_APA_CitationShort_FML"/></xsl:with-param>
-												<xsl:with-param name="FM"><xsl:call-template name="templ_prop_APA_CitationShort_FM"/></xsl:with-param>
-												<xsl:with-param name="ML"><xsl:call-template name="templ_prop_APA_CitationShort_ML"/></xsl:with-param>
-												<xsl:with-param name="FL"><xsl:call-template name="templ_prop_APA_CitationShort_FL"/></xsl:with-param>
+												<xsl:with-param name="FML">
+													<xsl:choose>
+														<xsl:when test="msxsl:node-set($ListPopulatedWithMain)/b:Citation/b:NonUniqueLastName">
+															<xsl:call-template name="templ_prop_APA_CitationLong_FML"/>
+														</xsl:when>
+														<xsl:otherwise>
+															<xsl:call-template name="templ_prop_APA_CitationShort_FML"/>
+														</xsl:otherwise>
+													</xsl:choose>
+												</xsl:with-param>
+												<xsl:with-param name="FM">
+													<xsl:choose>
+														<xsl:when test="msxsl:node-set($ListPopulatedWithMain)/b:Citation/b:NonUniqueLastName">
+															<xsl:call-template name="templ_prop_APA_CitationLong_FM"/>
+														</xsl:when>
+														<xsl:otherwise>
+															<xsl:call-template name="templ_prop_APA_CitationShort_FM"/>
+														</xsl:otherwise>
+													</xsl:choose>
+												</xsl:with-param>
+												<xsl:with-param name="ML">
+													<xsl:choose>
+														<xsl:when test="msxsl:node-set($ListPopulatedWithMain)/b:Citation/b:NonUniqueLastName">
+															<xsl:call-template name="templ_prop_APA_CitationLong_ML"/>
+														</xsl:when>
+														<xsl:otherwise>
+															<xsl:call-template name="templ_prop_APA_CitationShort_ML"/>
+														</xsl:otherwise>
+													</xsl:choose>
+												</xsl:with-param>
+												<xsl:with-param name="FL">
+													<xsl:choose>
+														<xsl:when test="msxsl:node-set($ListPopulatedWithMain)/b:Citation/b:NonUniqueLastName">
+															<xsl:call-template name="templ_prop_APA_CitationLong_FL"/>
+														</xsl:when>
+														<xsl:otherwise>
+															<xsl:call-template name="templ_prop_APA_CitationShort_FL"/>
+														</xsl:otherwise>
+													</xsl:choose>
+												</xsl:with-param>
 												<xsl:with-param name="upperLast">no</xsl:with-param>
 												<xsl:with-param name="withDot">no</xsl:with-param>
 											</xsl:call-template>
@@ -535,7 +2500,19 @@
 
 										<xsl:if test="$cAuthors > $maxCitationAuthors">
 											<xsl:if test="position() = 1">
-												<xsl:call-template name="templ_prop_Space"/>
+												<xsl:variable name="noCommaBeforeAnd">
+													<xsl:call-template name="templ_prop_NoCommaBeforeAnd" />
+												</xsl:variable>
+
+												<xsl:choose>
+													<xsl:when test="$noCommaBeforeAnd != 'yes'">
+														<xsl:call-template name="templ_prop_Space"/>
+													</xsl:when>
+													<xsl:otherwise>
+														<xsl:call-template name="templ_prop_Space"/>
+													</xsl:otherwise>
+												</xsl:choose>
+
 												<xsl:call-template name="templ_str_AndOthersUnCap"/>
 											</xsl:if>
 										</xsl:if>
@@ -547,7 +2524,33 @@
 													<xsl:call-template name="templ_prop_APA_BeforeLastAuthor"/>
 													<xsl:call-template name="templ_prop_Space"/>
 												</xsl:if>
+
+												<xsl:if test="$cAuthors > 2">
+													<xsl:variable name="noCommaBeforeAnd">
+														<xsl:call-template name="templ_prop_NoCommaBeforeAnd" />
+													</xsl:variable>
+
+													<xsl:variable name="noAndBeforeLastAuthor">
+														<xsl:call-template name="templ_prop_NoAndBeforeLastAuthor"/>
+													</xsl:variable>
+
+													<xsl:choose>
+														<xsl:when test="$noCommaBeforeAnd != 'yes' or $noAndBeforeLastAuthor = 'yes'">
+															<xsl:call-template name="templ_prop_AuthorsSeparator"/>
+														</xsl:when>
+														<xsl:otherwise>
+															<xsl:call-template name="templ_prop_Space"/>
+														</xsl:otherwise>
+													</xsl:choose>
+
+													<xsl:if test="$noAndBeforeLastAuthor != 'yes'">
+														<xsl:call-template name="templ_prop_APA_BeforeLastAuthor"/>
+														<xsl:call-template name="templ_prop_Space"/>
+													</xsl:if>
+												</xsl:if>
 											</xsl:if>
+
+											
 										</xsl:if>
 									</xsl:for-each>
 								</xsl:otherwise>
@@ -556,40 +2559,119 @@
 
 						<xsl:variable name="title">
 							<xsl:choose>
-								<xsl:when test="msxsl:node-set($ListPopulatedWithMain)/b:Citation/b:NoTitle"></xsl:when>
-								<xsl:otherwise><xsl:value-of select="$title0" /></xsl:otherwise>
+								<xsl:when test="msxsl:node-set($ListPopulatedWithMain)/b:Citation/b:NoTitle">
+								</xsl:when>
+								<xsl:otherwise>
+									<xsl:value-of select="$title0" />
+								</xsl:otherwise>
 							</xsl:choose>
 						</xsl:variable>
 
 						<xsl:variable name="year">
 							<xsl:choose>
-								<xsl:when test="msxsl:node-set($ListPopulatedWithMain)/b:Citation/b:NoYear"></xsl:when>
-								<xsl:when test="$type='InternetSite'">
-									<xsl:if test="string-length($year0) > 0"><xsl:value-of select="$year0" /></xsl:if>
-									<xsl:if test="string-length($year0) = 0"><xsl:call-template name="templ_str_NoDateShortUnCap"/></xsl:if>
+								<xsl:when test="msxsl:node-set($ListPopulatedWithMain)/b:Citation/b:NoYear">
 								</xsl:when>
-								<xsl:otherwise><xsl:value-of select="$year0" /></xsl:otherwise>
+
+								<xsl:when test="$type='InternetSite'">
+									<xsl:if test="string-length($year0) > 0">
+										<xsl:value-of select="$year0" />
+									</xsl:if>
+									<xsl:if test="string-length($year0) = 0">
+										<xsl:call-template name="templ_str_NoDateShortUnCap"/>
+									</xsl:if>
+								</xsl:when>
+
+								<xsl:otherwise>
+									<xsl:value-of select="$year0" />
+								</xsl:otherwise>
 							</xsl:choose>
 						</xsl:variable>
 
 						<xsl:variable name="author">
 							<xsl:choose>
-								<xsl:when test="msxsl:node-set($ListPopulatedWithMain)/b:Citation/b:NoAuthor"></xsl:when>
-								<xsl:otherwise><xsl:value-of select="$author0" /></xsl:otherwise>
+								<xsl:when test="msxsl:node-set($ListPopulatedWithMain)/b:Citation/b:NoAuthor">
+								</xsl:when>
+								<xsl:otherwise>
+									<xsl:value-of select="$author0" />
+								</xsl:otherwise>
 							</xsl:choose>
 						</xsl:variable>
 
+						<xsl:variable name="prop_APA_Hyphens">
+							<xsl:call-template name="templ_prop_Hyphens"/>
+						</xsl:variable>
+
 						<xsl:variable name="volume" select="msxsl:node-set($ListPopulatedWithMain)/b:Citation/b:Volume"/>
+
+						<xsl:variable name="volVolume">
+							<xsl:if test="string-length($volume) > 0">
+								<xsl:call-template name="StringFormat">
+									<xsl:with-param name="format">
+										<xsl:choose>
+											<xsl:when test="not(string-length($volume)=string-length(translate($volume, ',', '')))">
+												<xsl:call-template name="templ_str_VolumesShortUnCap"/>
+											</xsl:when>
+											<xsl:when test="string-length($volume)=string-length(translate($volume, $prop_APA_Hyphens, ''))">
+												<xsl:call-template name="templ_str_VolumeShortUnCap"/>
+											</xsl:when>
+											<xsl:otherwise>
+												<xsl:call-template name="templ_str_VolumesShortUnCap"/>
+											</xsl:otherwise>
+										</xsl:choose>
+									</xsl:with-param>
+									<xsl:with-param name="parameters">
+										<t:params>
+											<t:param>
+												<xsl:value-of select="$volume"/>
+											</t:param>
+										</t:params>
+									</xsl:with-param>
+								</xsl:call-template>
+							</xsl:if>
+						</xsl:variable>
+
 						<xsl:variable name="pages" select="msxsl:node-set($ListPopulatedWithMain)/b:Citation/b:Pages"/>
 
+						<xsl:variable name="ppPages">
+							<xsl:if test="string-length($pages)>0">
+								<xsl:choose>
+									<xsl:when test="0!=string-length(translate($pages, concat(',0123456789 ', $prop_APA_Hyphens), ''))"/>
+									<xsl:when test="not(string-length($pages)=string-length(translate($pages, ',', '')))">
+										<xsl:call-template name="templ_str_PagesCountinousShort"/>
+									</xsl:when>
+									<xsl:when test="string-length($pages)=string-length(translate($pages, $prop_APA_Hyphens, ''))">
+										<xsl:call-template name="templ_str_PageShort"/>
+									</xsl:when>
+									<xsl:otherwise>
+										<xsl:call-template name="templ_str_PagesCountinousShort"/>
+									</xsl:otherwise>
+								</xsl:choose>
+								<xsl:call-template name="templ_prop_Space"/>
+								<xsl:value-of select="$pages"/>
+							</xsl:if>
+						</xsl:variable>
+
 						<xsl:variable name="displayAuthor">
-							<xsl:value-of select="$author" />
+							<xsl:choose>
+								<xsl:when test="$type='Patent' and string-length($patent) > 0">
+									<xsl:value-of select="$patent" />
+								</xsl:when>
+								<xsl:otherwise>
+									<xsl:value-of select="$author" />
+								</xsl:otherwise>
+							</xsl:choose>
 						</xsl:variable>
 
 						<xsl:variable name="displayTitle">
 							<xsl:choose>
-								<xsl:when test="string-length($displayAuthor) = 0"><xsl:value-of select="$title" /></xsl:when>
-								<xsl:when test="msxsl:node-set($ListPopulatedWithMain)/b:Citation/b:RepeatedAuthor"><xsl:value-of select="$title" /></xsl:when>
+								<xsl:when test="string-length($displayAuthor) = 0">
+									<xsl:value-of select="$title" />
+								</xsl:when>
+								<xsl:when test="$type='Patent' and string-length($patent) > 0">
+								</xsl:when>
+								<xsl:when test="msxsl:node-set($ListPopulatedWithMain)/b:Citation/b:RepeatedAuthor">
+									<xsl:value-of select="$title" />
+								</xsl:when>
 							</xsl:choose>
 						</xsl:variable>
 
@@ -662,12 +2744,16 @@
 			</xsl:when>
 
       <xsl:when test="b:Bibliography">
-        <html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40">
+        <html xmlns:o="urn:schemas-microsoft-com:office:office"
+						xmlns:w="urn:schemas-microsoft-com:office:word"
+						xmlns="http://www.w3.org/TR/REC-html40">
           <head>
+            
             <style>
               p.MsoBibliography, li.MsoBibliography, div.MsoBibliography
             </style>
           </head>
+
           <body>
             <xsl:variable name="ListPopulatedWithMain">
               <xsl:call-template name="populateMain">
@@ -794,7 +2880,7 @@
                   <xsl:choose>
                     
                     <!-- İnternet Sitesi (Web Sitesi) Kaynak Türleri -->
-                    <xsl:when test="b:SourceType='InternetSite' or b:SourceType='DocumentFromInternetSite'">
+                    <xsl:when test="b:SourceType='InternetSite' or b:SourceType='DocumentFromInternetSite' or b:SourceType='ElectronicSource'">
                         <xsl:if test="string-length($theAuthorDot)>0">
                           <xsl:value-of select="$theAuthorDot"/>
                         </xsl:if>
@@ -857,6 +2943,98 @@
                         <xsl:if test="string-length($accDate)=0 and string-length(b:URL)>0">
                             <xsl:text>.</xsl:text>
                         </xsl:if>
+                    </xsl:when>
+
+                    <!-- RAPOR VE TEZLER İÇİN ÖZEL DÜZENLEME -->
+                    <xsl:when test="b:SourceType='Report'">
+                      <xsl:if test="string-length($theAuthorDot)>0">
+                        <xsl:value-of select="$theAuthorDot"/>
+                      </xsl:if>
+
+                      <xsl:if test="string-length($enclosedDateDot)>0">
+                        <xsl:call-template name="templ_prop_Space"/>
+                        <xsl:value-of select="$enclosedDateDot"/>
+                      </xsl:if>
+
+                      <xsl:variable name="thesisTypeVar">
+                        <xsl:value-of select="b:ThesisType"/>
+                      </xsl:variable>
+
+                      <xsl:choose>
+                          <!-- TEZ FORMATI -->
+                          <xsl:when test="string-length($thesisTypeVar)>0">
+                              <xsl:if test="string-length(b:Title)>0">
+                                  <xsl:call-template name="templ_prop_Space"/>
+                                  <xsl:value-of select="b:Title"/><xsl:text>, </xsl:text>
+                              </xsl:if>
+                              
+                              <xsl:text>(</xsl:text><xsl:value-of select="$thesisTypeVar"/><xsl:text>)</xsl:text>
+                              
+                              <xsl:choose>
+                                  <xsl:when test="string-length(b:Institution)>0">
+                                      <xsl:text>, </xsl:text><xsl:value-of select="b:Institution"/>
+                                      <xsl:if test="string-length(b:Department)>0">
+                                           <xsl:text> </xsl:text><xsl:value-of select="b:Department"/>
+                                      </xsl:if>
+                                  </xsl:when>
+                                  <xsl:when test="string-length(b:Publisher)>0">
+                                      <xsl:text>, </xsl:text><xsl:value-of select="b:Publisher"/>
+                                  </xsl:when>
+                              </xsl:choose>
+                              
+                              <xsl:choose>
+                                  <xsl:when test="string-length(b:City)>0">
+                                      <xsl:text>, </xsl:text><xsl:value-of select="b:City"/><xsl:text>.</xsl:text>
+                                  </xsl:when>
+                                  <xsl:otherwise>
+                                      <xsl:text>.</xsl:text>
+                                  </xsl:otherwise>
+                              </xsl:choose>
+                          </xsl:when>
+                          
+                          <!-- RAPOR FORMATI -->
+                          <xsl:otherwise>
+                              <xsl:if test="string-length(b:Title)>0">
+                                  <xsl:call-template name="templ_prop_Space"/>
+                                  <xsl:text>“</xsl:text><xsl:value-of select="b:Title"/><xsl:text>”</xsl:text>
+                                  <xsl:choose>
+                                      <xsl:when test="string-length(b:Institution)>0 or string-length(b:Publisher)>0 or string-length(b:City)>0 or string-length(b:Pages)>0">
+                                          <xsl:text>, </xsl:text>
+                                      </xsl:when>
+                                      <xsl:otherwise>
+                                          <xsl:text>.</xsl:text>
+                                      </xsl:otherwise>
+                                  </xsl:choose>
+                              </xsl:if>
+                              
+                              <xsl:choose>
+                                  <xsl:when test="string-length(b:Institution)>0">
+                                      <xsl:value-of select="b:Institution"/>
+                                  </xsl:when>
+                                  <xsl:when test="string-length(b:Publisher)>0">
+                                      <xsl:value-of select="b:Publisher"/>
+                                  </xsl:when>
+                              </xsl:choose>
+                              
+                              <xsl:if test="string-length(b:City)>0">
+                                  <xsl:if test="string-length(b:Institution)>0 or string-length(b:Publisher)>0">
+                                      <xsl:text>, </xsl:text>
+                                  </xsl:if>
+                                  <xsl:value-of select="b:City"/>
+                              </xsl:if>
+
+                              <xsl:if test="string-length(b:Pages)>0">
+                                  <xsl:if test="string-length(b:Institution)>0 or string-length(b:Publisher)>0 or string-length(b:City)>0">
+                                      <xsl:text>, </xsl:text>
+                                  </xsl:if>
+                                  <xsl:value-of select="b:Pages"/>
+                              </xsl:if>
+
+                              <xsl:if test="string-length(b:Institution)>0 or string-length(b:Publisher)>0 or string-length(b:City)>0 or string-length(b:Pages)>0">
+                                  <xsl:text>.</xsl:text>
+                              </xsl:if>
+                          </xsl:otherwise>
+                      </xsl:choose>
                     </xsl:when>
 
                     <!-- Kitaplar (Books) -->
