@@ -2904,7 +2904,7 @@
                           <xsl:if test="string-length(b:Title)=0 and (string-length($theAuthorDot)>0 or string-length($enclosedDateDot)>0)">
                              <xsl:call-template name="templ_prop_Space"/>
                           </xsl:if>
-                          <a href="{b:URL}" style="color:blue; text-decoration:underline;">
+                          <a href="{b:URL}" style="color:#0000FF; text-decoration:underline;">
                              <xsl:value-of select="b:URL"/>
                           </a>
                         </xsl:if>
@@ -3056,8 +3056,115 @@
                         </xsl:if>
                     </xsl:when>
 
-                    <!-- Makaleler (Journal Articles) -->
-                    <xsl:when test="b:SourceType='JournalArticle'">
+                  <!-- Kitap Bölümü (Book Section) -->
+                  <xsl:when test="b:SourceType='BookSection'">
+                      <xsl:if test="string-length($theAuthorDot)>0">
+                        <xsl:value-of select="$theAuthorDot"/>
+                      </xsl:if>
+                      <xsl:if test="string-length($enclosedDateDot)>0">
+                        <xsl:call-template name="templ_prop_Space"/>
+                        <xsl:value-of select="$enclosedDateDot"/>
+                      </xsl:if>
+                      
+                      <xsl:if test="string-length(b:Title)>0">
+                        <xsl:call-template name="templ_prop_Space"/>
+                        <xsl:text>“</xsl:text><xsl:value-of select="b:Title"/><xsl:text>”,</xsl:text>
+                      </xsl:if>
+
+                      <!-- Editör veya Kitap Yazarı Bilgisini Alma -->
+                      <xsl:variable name="editorStr">
+                        <xsl:choose>
+                          <xsl:when test="count(b:Author/b:Editor/b:NameList/b:Person) > 0">
+                            <xsl:for-each select="b:Author/b:Editor/b:NameList/b:Person">
+                               <xsl:value-of select="b:Last"/>
+                               <xsl:if test="string-length(b:First)>0">
+                                   <xsl:text> </xsl:text>
+                                   <xsl:value-of select="substring(b:First,1,1)"/>
+                                   <xsl:text>.</xsl:text>
+                               </xsl:if>
+                               <xsl:if test="position() != last()">
+                                   <xsl:text> &amp; </xsl:text>
+                               </xsl:if>
+                            </xsl:for-each>
+                          </xsl:when>
+                          <xsl:when test="count(b:Author/b:BookAuthor/b:NameList/b:Person) > 0">
+                            <xsl:for-each select="b:Author/b:BookAuthor/b:NameList/b:Person">
+                               <xsl:value-of select="b:Last"/>
+                               <xsl:if test="string-length(b:First)>0">
+                                   <xsl:text> </xsl:text>
+                                   <xsl:value-of select="substring(b:First,1,1)"/>
+                                   <xsl:text>.</xsl:text>
+                               </xsl:if>
+                               <xsl:if test="position() != last()">
+                                   <xsl:text> &amp; </xsl:text>
+                               </xsl:if>
+                            </xsl:for-each>
+                          </xsl:when>
+                        </xsl:choose>
+                      </xsl:variable>
+
+                      <xsl:if test="string-length(b:BookTitle)>0">
+                        <xsl:call-template name="templ_prop_Space"/>
+                        <i xmlns="http://www.w3.org/TR/REC-html40">
+                            <xsl:value-of select="b:BookTitle"/>
+                        </i>
+                        <xsl:if test="string-length($editorStr)>0">
+                           <xsl:text> (ed. </xsl:text>
+                           <xsl:value-of select="$editorStr"/>
+                           <xsl:text>)</xsl:text>
+                        </xsl:if>
+                        <xsl:text> içinde</xsl:text>
+                      </xsl:if>
+                      
+                      <xsl:if test="string-length(b:BookTitle)=0 and string-length($editorStr)>0">
+                         <xsl:call-template name="templ_prop_Space"/>
+                         <xsl:text>(ed. </xsl:text>
+                         <xsl:value-of select="$editorStr"/>
+                         <xsl:text>) içinde</xsl:text>
+                      </xsl:if>
+
+                      <xsl:choose>
+                          <xsl:when test="string-length(b:Publisher)>0 or string-length(b:City)>0 or string-length(b:Pages)>0">
+                              <xsl:text>, </xsl:text>
+                          </xsl:when>
+                          <xsl:otherwise>
+                              <xsl:text>.</xsl:text>
+                          </xsl:otherwise>
+                      </xsl:choose>
+
+                      <xsl:variable name="pub"><xsl:value-of select="b:Publisher"/></xsl:variable>
+                      <xsl:variable name="city"><xsl:value-of select="b:City"/></xsl:variable>
+                      
+                      <xsl:if test="string-length($pub)>0">
+                        <xsl:value-of select="$pub"/>
+                      </xsl:if>
+                      <xsl:if test="string-length($pub)>0 and string-length($city)>0">
+                        <xsl:text>, </xsl:text>
+                      </xsl:if>
+                      <xsl:if test="string-length($city)>0">
+                        <xsl:value-of select="$city"/>
+                      </xsl:if>
+                      
+                      <xsl:if test="string-length($pub)>0 or string-length($city)>0">
+                        <xsl:choose>
+                            <xsl:when test="string-length(b:Pages)>0">
+                                <xsl:text>, </xsl:text>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:text>.</xsl:text>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                      </xsl:if>
+                      
+                      <xsl:if test="string-length(b:Pages)>0">
+                        <xsl:text>s. </xsl:text>
+                        <xsl:value-of select="b:Pages"/>
+                        <xsl:text>.</xsl:text>
+                      </xsl:if>
+                  </xsl:when>
+
+                  <!-- Makaleler (Journal Articles) -->
+                  <xsl:when test="b:SourceType='JournalArticle'">
                         <xsl:if test="string-length($theAuthorDot)>0">
                           <xsl:value-of select="$theAuthorDot"/>
 
